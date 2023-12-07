@@ -1,4 +1,5 @@
-import pygame, model
+import model
+import pygame
 
 
 def control():
@@ -9,7 +10,8 @@ def control():
             exit()
         if o.type == pygame.KEYUP and o.key == pygame.K_F11:
             model.fullscreen = not model.fullscreen
-        if model.click == True:
-            model.click = False
-        if o.type == pygame.KEYUP and model.click == False:
-            model.click = True
+        if o.type == pygame.KEYUP and o.key==pygame.K_F11:
+            if model.click == True:
+                model.click = False
+            elif model.click == False:
+                model.click = True
