@@ -1,5 +1,8 @@
-import model
 import pygame
+
+import model
+
+pygame.key.set_repeat(100)
 
 
 def control():
@@ -8,10 +11,5 @@ def control():
     for o in events:
         if o.type == pygame.QUIT:
             exit()
-        if o.type == pygame.KEYUP and o.key == pygame.K_F11:
-            model.fullscreen = not model.fullscreen
-        if o.type == pygame.KEYUP and o.key==pygame.K_F11:
-            if model.click == True:
-                model.click = False
-            elif model.click == False:
-                model.click = True
+        if o.type == pygame.KEYUP and o.key == pygame.K_TAB:
+            model.debug = not model.debug
