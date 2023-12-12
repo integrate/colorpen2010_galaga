@@ -1,8 +1,7 @@
-import pygame
-
-import model
+import pygame,model,settings
 
 pygame.key.set_repeat(100)
+pygame.time.set_timer(8888,settings.emovet*1000)
 
 
 def control():

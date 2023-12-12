@@ -1,9 +1,7 @@
-import pygame
+import pygame,settings,model
 
-import model
-
-screen = pygame.display.set_mode([600, 600])
-background=pygame.image.load('sprites/space.jpg')
+screen = pygame.display.set_mode(settings.screen_size)
+background=pygame.image.load('custom/space.jpg')
 background2=pygame.transform.scale(background,[600,600])
 
 def risovanie():

@@ -1,10 +1,12 @@
 import pygame
 
+import settings
+
 
 class Playerc:
     def __init__(self, x, y):
-        image = pygame.image.load('images/player/player.png')
-        self.image=pygame.transform.scale(image,[15*4,16*4])
+        image = pygame.image.load('original/player/player.png')
+        self.image=pygame.transform.scale(image,[image.get_width()*settings.dounler,image.get_height()*settings.dounler])
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
 
     def paint(self, screen: pygame.Surface):

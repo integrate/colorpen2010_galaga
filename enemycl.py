@@ -1,9 +1,10 @@
-import pygame
+import pygame,settings
 
 
 class Enemyc:
     def __init__(self, pyt, x, y):
         self.image = pygame.image.load(pyt)
+        self.image=pygame.transform.scale(self.image,[self.image.get_width()*settings.dounler,self.image.get_height()*settings.dounler])
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
 
     def paint(self, screen: pygame.Surface):
