@@ -3,7 +3,8 @@ import pygame
 
 class Playerc:
     def __init__(self, x, y):
-        self.image = pygame.image.load('sprites/player/player_ship.png')
+        image = pygame.image.load('images/player/player.png')
+        self.image=pygame.transform.scale(image,[15*4,16*4])
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
 
     def paint(self, screen: pygame.Surface):
