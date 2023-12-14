@@ -1,7 +1,7 @@
 import pygame,model,settings
 
 pygame.key.set_repeat(100)
-pygame.time.set_timer(8888,settings.emovet*1000)
+pygame.time.set_timer(8888,settings.emovet*100)
 
 
 def control():
@@ -12,3 +12,5 @@ def control():
             exit()
         if o.type == pygame.KEYUP and o.key == pygame.K_TAB:
             model.debug = not model.debug
+        if o.type == 8888:
+            model.enemy1.moveright()
