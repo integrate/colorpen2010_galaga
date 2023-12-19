@@ -1,14 +1,18 @@
-import pygame,settings,model
+import model
+import pygame
+import settings
 
 screen = pygame.display.set_mode(settings.screen_size)
-background=pygame.image.load('custom/space.jpg')
-background2=pygame.transform.scale(background,[600,600])
+background = pygame.image.load('custom/space.jpg')
+background2 = pygame.transform.scale(background, [600, 600])
+
 
 def risovanie():
-    screen.blit(background2,[0,0])
-    model.enemy1.paint(screen,model.draw)
-    model.enemy2.paint(screen,model.draw)
-    model.player.paint(screen)
+    screen.blit(background2, [0, 0])
+    if model.paint == True:
+        model.enemy1.paint(screen, model.draw)
+        model.enemy2.paint(screen, model.draw)
+        model.player.paint(screen)
     if model.debug == True:
         model.enemy1.paint_debug(screen)
         model.enemy2.paint_debug(screen)

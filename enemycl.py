@@ -15,18 +15,28 @@ class Enemyc:
 
     def paint(self, screen: pygame.Surface, draw):
         if draw == True:
-            screen.blit(self.image, [self.rect.x , self.rect.y])
-            xcenter=self.rect.centerx
-            self.rect.width = self.image.get_width()
-            self.rect.centerx=xcenter
+            screen.blit(self.image, [self.rect.x, self.rect.y])
         if draw == False:
             screen.blit(self.image2, [self.rect.x, self.rect.y])
-            xcenter=self.rect.centerx
+
+    def rect_remaker(self, draw):
+        if draw == True:
+            ycenter = self.rect.centery
+            xcenter = self.rect.centerx
+            self.rect.width = self.image.get_width()
+            self.rect.height = self.image.get_height()
+            self.rect.centerx = xcenter
+            self.rect.centery = ycenter
+        if draw == False:
+            ycenter = self.rect.centery
+            xcenter = self.rect.centerx
             self.rect.width = self.image2.get_width()
-            self.rect.centerx=xcenter
+            self.rect.height = self.image2.get_height()
+            self.rect.centerx = xcenter
+            self.rect.centery = ycenter
 
     def paint_debug(self, screen: pygame.Surface):
         pygame.draw.rect(screen, [255, 0, 0], self.rect, 3)
 
     def moveright(self):
-        self.rect.x += 5
+        self.rect.x += 15
