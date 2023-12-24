@@ -1,13 +1,14 @@
 import pygame
 
 import settings
+
 pygame.init()
 
-class Enemyc:
-    def __init__(self, pyt, pyt2, x, y,timer):
-        self.timer_number=pygame.event.custom_type()
-        pygame.time.set_timer(self.timer_number,timer)
 
+class Enemyc:
+    def __init__(self, pyt, pyt2, x, y, timer,xmove_l,xmove_r):
+        self.timer_number = pygame.event.custom_type()
+        pygame.time.set_timer(self.timer_number, timer)
 
         self.image2 = pygame.image.load(pyt2)
         self.image = pygame.image.load(pyt)
@@ -16,13 +17,16 @@ class Enemyc:
         self.image = pygame.transform.scale(self.image, [self.image.get_width() * settings.dounler,
                                                          self.image.get_height() * settings.dounler])
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
-        self.draw=True
+        self.draw = True
+
+        self.move_rect = pygame.rect.Rect(xmove_l, y, xmove_r, self.rect.height)
 
     def paint(self, screen: pygame.Surface):
         if self.draw == True:
             screen.blit(self.image, [self.rect.x, self.rect.y])
         if self.draw == False:
             screen.blit(self.image2, [self.rect.x, self.rect.y])
+
     def rect_remaker(self):
         if self.draw == True:
             ycenter = self.rect.centery
@@ -41,6 +45,7 @@ class Enemyc:
 
     def paint_debug(self, screen: pygame.Surface):
         pygame.draw.rect(screen, [255, 0, 0], self.rect, 3)
+        pygame.draw.rect(screen, [0, 255, 0], self.move_rect, 3)
 
     def moveright(self):
         self.rect.x += 15
@@ -48,10 +53,9 @@ class Enemyc:
         self.rect_remaker()
 
     def drawler(self):
-        self.draw= not self.draw
+        self.draw = not self.draw
 
-    def toolgun(self,events):
+    def toolgun(self, events):
         for o in events:
             if o.type == self.timer_number:
                 self.moveright()
-
