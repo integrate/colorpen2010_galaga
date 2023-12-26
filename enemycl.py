@@ -6,9 +6,11 @@ pygame.init()
 
 
 class Enemyc:
-    def __init__(self, pyt, pyt2, x, y, timer,xmove_l,xmove_r):
+    def __init__(self, pyt, pyt2, x, y, timer, xmove_l, xmove_r, move_speed):
         self.timer_number = pygame.event.custom_type()
         pygame.time.set_timer(self.timer_number, timer)
+        self.gothere = True
+        self.move_speed = move_speed
 
         self.image2 = pygame.image.load(pyt2)
         self.image = pygame.image.load(pyt)
@@ -19,7 +21,7 @@ class Enemyc:
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
         self.draw = True
 
-        self.move_rect = pygame.rect.Rect(xmove_l, y, xmove_r, self.rect.height)
+        self.move_rect = pygame.rect.Rect(xmove_l, y, xmove_r - xmove_l, self.rect.height)
 
     def paint(self, screen: pygame.Surface):
         if self.draw == True:
@@ -47,10 +49,10 @@ class Enemyc:
         pygame.draw.rect(screen, [255, 0, 0], self.rect, 3)
         pygame.draw.rect(screen, [0, 255, 0], self.move_rect, 3)
 
-    def moveright(self):
-        self.rect.x += 15
+    def moving(self, number):
         self.drawler()
         self.rect_remaker()
+        self.rect.x += number
 
     def drawler(self):
         self.draw = not self.draw
@@ -58,4 +60,16 @@ class Enemyc:
     def toolgun(self, events):
         for o in events:
             if o.type == self.timer_number:
-                self.moveright()
+                self.modelier()
+
+    def modelier(self):
+        if self.gothere == True:
+            self.moving(-self.move_speed)
+        elif self.gothere == False:
+            self.moving(self.move_speed)
+        if self.rect.right >= self.move_rect.right:
+            self.gothere = True
+            self.rect.right = self.move_rect.right
+        elif self.rect.left <= self.move_rect.left:
+            self.gothere = False
+            self.rect.left = self.move_rect.left
