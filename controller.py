@@ -8,14 +8,8 @@ pygame.key.set_repeat(100)
 def control():
     events = pygame.event.get()
     model.player.control(events)
-    model.enemy1.toolgun(events)
-    model.enemy2.toolgun(events)
-    model.enemy3.toolgun(events)
-    model.enemy4.toolgun(events)
-    model.enemy5.toolgun(events)
-    model.enemy6.toolgun(events)
-    model.enemy7.toolgun(events)
-    model.enemy8.toolgun(events)
+    for o in model.enemies:
+        o.toolgun(events)
 
     for o in events:
         if o.type == pygame.QUIT:
