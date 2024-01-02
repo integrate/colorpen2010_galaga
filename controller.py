@@ -18,3 +18,12 @@ def control():
             model.debug = not model.debug
         if o.type == pygame.KEYUP and o.key == pygame.K_q:
             model.paint = not model.paint
+        if o.type == pygame.KEYUP and o.key == pygame.K_d:
+            pass
+        if o.type == pygame.KEYUP and o.key == pygame.K_a:
+            pass
+        if o.type == pygame.KEYUP and o.key == pygame.K_w:
+            pass
+        if o.type == pygame.KEYUP and o.key == pygame.K_s:
+            pass
+
