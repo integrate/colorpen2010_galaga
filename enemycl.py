@@ -23,11 +23,18 @@ class Enemyc:
 
         self.move_rect = pygame.rect.Rect(xmove_l, y, xmove_r - xmove_l, self.rect.height)
 
-    def paint(self, screen: pygame.Surface):
-        if self.draw == True:
-            screen.blit(self.image, [self.rect.x, self.rect.y])
-        if self.draw == False:
-            screen.blit(self.image2, [self.rect.x, self.rect.y])
+    def paint(self, view, screen: pygame.Surface):
+        self.screen = screen
+        if view == False:
+            if self.draw == True:
+                screen.blit(self.image, [self.rect.x, self.rect.y])
+            if self.draw == False:
+                screen.blit(self.image2, [self.rect.x, self.rect.y])
+        if view == True:
+            if self.draw == True:
+                screen.blit(self.image_2, [self.rect.x, self.rect.y])
+            # if self.draw == False:
+            #     screen.blit(self.image1_2, [self.rect.x, self.rect.y])
 
     def rect_remaker(self):
         if self.draw == True:
@@ -73,3 +80,9 @@ class Enemyc:
         elif self.rect.left <= self.move_rect.left:
             self.gothere = False
             self.rect.left = self.move_rect.left
+
+    def povorot(self, a, b, angle=90):
+        if a == True and b == True:
+            self.image_2 = pygame.transform.rotate(self.image, angle)
+        # if a == True and b == True:
+        #     self.image1_2 = pygame.transform.rotate(self.image2, angle)

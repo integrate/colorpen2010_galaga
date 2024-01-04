@@ -5,6 +5,7 @@ import settings
 
 pygame.key.set_repeat(100)
 
+
 def control():
     events = pygame.event.get()
     model.player.control(events)
@@ -19,11 +20,7 @@ def control():
         if o.type == pygame.KEYUP and o.key == pygame.K_q:
             model.paint = not model.paint
         if o.type == pygame.KEYUP and o.key == pygame.K_d:
-            pass
+            model.enemies[0].povorot(True, True, 180)
+            model.viewed = not model.viewed
         if o.type == pygame.KEYUP and o.key == pygame.K_a:
             pass
-        if o.type == pygame.KEYUP and o.key == pygame.K_w:
-            pass
-        if o.type == pygame.KEYUP and o.key == pygame.K_s:
-            pass
-
