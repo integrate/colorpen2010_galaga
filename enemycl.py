@@ -6,9 +6,11 @@ pygame.init()
 
 
 class Enemyc:
-    def __init__(self, pyt, pyt2, x, y, timer, xmove_l, xmove_r, move_speed):
+    def __init__(self, pyt, pyt2, x, y, timer, timer2, xmove_l, xmove_r, move_speed):
         self.timer_number = pygame.event.custom_type()
+        self.timer_number2 = pygame.event.custom_type()
         pygame.time.set_timer(self.timer_number, timer)
+        pygame.time.set_timer(self.timer_number2, timer2)
         self.gothere = True
         self.move_speed = move_speed
 
@@ -30,11 +32,11 @@ class Enemyc:
                 screen.blit(self.image, [self.rect.x, self.rect.y])
             if self.draw == False:
                 screen.blit(self.image2, [self.rect.x, self.rect.y])
-        if view == True:
-            if self.draw == True:
-                screen.blit(self.image_2, [self.rect.x, self.rect.y])
-            # if self.draw == False:
-            #     screen.blit(self.image1_2, [self.rect.x, self.rect.y])
+        # if view == True:
+        #     if self.draw == True:
+        #         screen.blit(self.image_2, [self.rect.x, self.rect.y])
+        # if self.draw == False:
+        #     screen.blit(self.image1_2, [self.rect.x, self.rect.y])
 
     def rect_remaker(self):
         if self.draw == True:
@@ -68,6 +70,8 @@ class Enemyc:
         for o in events:
             if o.type == self.timer_number:
                 self.modelier()
+            if o.type == self.timer_number2:
+                self.povorot(True,False)
 
     def modelier(self):
         if self.gothere == True:
@@ -81,8 +85,8 @@ class Enemyc:
             self.gothere = False
             self.rect.left = self.move_rect.left
 
-    def povorot(self, a, b, angle=90):
+    def povorot(self, a, b):
         if a == True and b == True:
-            self.image_2 = pygame.transform.rotate(self.image, angle)
-        # if a == True and b == True:
-        #     self.image1_2 = pygame.transform.rotate(self.image2, angle)
+            self.image = pygame.transform.rotate(self.image, 90)
+        if a == True and b == True:
+            self.image2 = pygame.transform.rotate(self.image2, 90)
