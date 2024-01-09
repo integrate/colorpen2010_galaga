@@ -23,6 +23,9 @@ class Enemyc:
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
         self.draw = True
 
+        self.image_2 = self.image
+        self.image2_2 = self.image_2
+
         self.move_rect = pygame.rect.Rect(xmove_l, y, xmove_r - xmove_l, self.rect.height)
 
     def paint(self, view, screen: pygame.Surface):
@@ -32,11 +35,11 @@ class Enemyc:
                 screen.blit(self.image, [self.rect.x, self.rect.y])
             if self.draw == False:
                 screen.blit(self.image2, [self.rect.x, self.rect.y])
-        # if view == True:
-        #     if self.draw == True:
-        #         screen.blit(self.image_2, [self.rect.x, self.rect.y])
-        # if self.draw == False:
-        #     screen.blit(self.image1_2, [self.rect.x, self.rect.y])
+        if view == True:
+            if self.draw == True:
+                screen.blit(self.image_2, [self.rect.x, self.rect.y])
+            if self.draw == False:
+                screen.blit(self.image2_2, [self.rect.x, self.rect.y])
 
     def rect_remaker(self):
         if self.draw == True:
@@ -71,7 +74,7 @@ class Enemyc:
             if o.type == self.timer_number:
                 self.modelier()
             if o.type == self.timer_number2:
-                self.povorot(True,False)
+                self.povorot(True, False, 45)
 
     def modelier(self):
         if self.gothere == True:
@@ -85,8 +88,8 @@ class Enemyc:
             self.gothere = False
             self.rect.left = self.move_rect.left
 
-    def povorot(self, a, b):
+    def povorot(self, a, b, ygol):
         if a == True and b == True:
-            self.image = pygame.transform.rotate(self.image, 90)
+            self.image_2 = pygame.transform.rotate(self.image, ygol)
         if a == True and b == True:
-            self.image2 = pygame.transform.rotate(self.image2, 90)
+            self.image2_2 = pygame.transform.rotate(self.image2, ygol)
