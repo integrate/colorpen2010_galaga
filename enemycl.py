@@ -24,7 +24,7 @@ class Enemyc:
         self.draw = True
 
         self.image_2 = self.image
-        self.image2_2 = self.image_2
+        self.image2_2 = self.image2
 
         self.move_rect = pygame.rect.Rect(xmove_l, y, xmove_r - xmove_l, self.rect.height)
 
@@ -73,8 +73,8 @@ class Enemyc:
         for o in events:
             if o.type == self.timer_number:
                 self.modelier()
-            if o.type == self.timer_number2:
-                self.povorot(True, False, 45)
+            # if o.type == self.timer_number2:
+                # self.povorot(True, False, 45)
 
     def modelier(self):
         if self.gothere == True:
@@ -88,8 +88,6 @@ class Enemyc:
             self.gothere = False
             self.rect.left = self.move_rect.left
 
-    def povorot(self, a, b, ygol):
-        if a == True and b == True:
+    def povorot(self, ygol):
             self.image_2 = pygame.transform.rotate(self.image, ygol)
-        if a == True and b == True:
             self.image2_2 = pygame.transform.rotate(self.image2, ygol)
