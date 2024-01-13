@@ -21,7 +21,7 @@ class Enemyc:
         self.image = pygame.transform.scale(self.image, [self.image.get_width() * settings.dounler,
                                                          self.image.get_height() * settings.dounler])
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
-        self.draw = True
+        self.krilia_yes_or_no = True
 
         self.image_2 = self.image
         self.image2_2 = self.image2
@@ -31,25 +31,26 @@ class Enemyc:
     def paint(self, view, screen: pygame.Surface):
         self.screen = screen
         if view == False:
-            if self.draw == True:
+            if self.krilia_yes_or_no == True:
                 screen.blit(self.image, [self.rect.x, self.rect.y])
-            if self.draw == False:
+            if self.krilia_yes_or_no == False:
                 screen.blit(self.image2, [self.rect.x, self.rect.y])
         if view == True:
-            if self.draw == True:
+            if self.krilia_yes_or_no == True:
                 screen.blit(self.image_2, [self.rect.x, self.rect.y])
-            if self.draw == False:
+            if self.krilia_yes_or_no == False:
                 screen.blit(self.image2_2, [self.rect.x, self.rect.y])
 
     def rect_remaker(self):
-        if self.draw == True:
+        if self.krilia_yes_or_no == True:
+            if
             ycenter = self.rect.centery
             xcenter = self.rect.centerx
             self.rect.width = self.image.get_width()
             self.rect.height = self.image.get_height()
             self.rect.centerx = xcenter
             self.rect.centery = ycenter
-        if self.draw == False:
+        if self.krilia_yes_or_no == False:
             ycenter = self.rect.centery
             xcenter = self.rect.centerx
             self.rect.width = self.image2.get_width()
@@ -62,12 +63,13 @@ class Enemyc:
         pygame.draw.rect(screen, [0, 255, 0], self.move_rect, 3)
 
     def moving(self, number):
-        self.drawler()
+        self.animation_krilia()
         self.rect_remaker()
-        self.rect.x += number
+        # self.rect.x += number
 
-    def drawler(self):
-        self.draw = not self.draw
+    def animation_krilia(self):
+
+        self.krilia_yes_or_no =  self.krilia_yes_or_no
 
     def toolgun(self, events):
         for o in events:
@@ -89,5 +91,13 @@ class Enemyc:
             self.rect.left = self.move_rect.left
 
     def povorot(self, ygol):
-            self.image_2 = pygame.transform.rotate(self.image, ygol)
-            self.image2_2 = pygame.transform.rotate(self.image2, ygol)
+        ycenter = self.rect.centery
+        xcenter = self.rect.centerx
+        self.image_2 = pygame.transform.rotate(self.image, ygol)
+        self.image2_2 = pygame.transform.rotate(self.image2, ygol)
+        self.rect.width = self.image_2.get_width()
+        self.rect.height = self.image_2.get_height()
+        self.rect.width = self.image2_2.get_width()
+        self.rect.height = self.image2_2.get_height()
+        self.rect.centerx = xcenter
+        self.rect.centery = ycenter
