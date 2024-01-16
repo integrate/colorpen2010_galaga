@@ -27,50 +27,34 @@ class Enemyc:
 
         self.move_rect = pygame.rect.Rect(xmove_l, y, xmove_r - xmove_l, self.rect.height)
 
-    def paint(self, view, screen: pygame.Surface):
+    def paint(self, screen: pygame.Surface):
         self.screen = screen
-        if view == False:
+        if self.povorot_yes_or_no == False:
             if self.krilia_yes_or_no == True:
                 screen.blit(self.image, [self.rect.x, self.rect.y])
             if self.krilia_yes_or_no == False:
                 screen.blit(self.image2, [self.rect.x, self.rect.y])
-        if view == True:
+        if self.povorot_yes_or_no == True:
             if self.krilia_yes_or_no == True:
                 screen.blit(self.image_povoroter1, [self.rect.x, self.rect.y])
             if self.krilia_yes_or_no == False:
                 screen.blit(self.image_povoroter2, [self.rect.x, self.rect.y])
 
     def rect_remaker(self):
+        ycenter = self.rect.centery
+        xcenter = self.rect.centerx
         if self.krilia_yes_or_no == True:
             if self.povorot_yes_or_no==True:
-                ycenter = self.rect.centery
-                xcenter = self.rect.centerx
-                self.rect.width = self.image_povoroter1.get_width()
-                self.rect.height = self.image_povoroter1.get_height()
-                self.rect.centerx = xcenter
-                self.rect.centery = ycenter
+                self.rect.size = self.image_povoroter1.get_size()
             if self.povorot_yes_or_no == False:
-                ycenter = self.rect.centery
-                xcenter = self.rect.centerx
-                self.rect.width = self.image.get_width()
-                self.rect.height = self.image.get_height()
-                self.rect.centerx = xcenter
-                self.rect.centery = ycenter
+                self.rect.size = self.image.get_size()
         if self.krilia_yes_or_no == False:
             if self.povorot_yes_or_no == True:
-                ycenter = self.rect.centery
-                xcenter = self.rect.centerx
-                self.rect.width = self.image_povoroter2.get_width()
-                self.rect.height = self.image_povoroter2.get_height()
-                self.rect.centerx = xcenter
-                self.rect.centery = ycenter
+                self.rect.size = self.image_povoroter2.get_size()
             if self.povorot_yes_or_no == False:
-                ycenter = self.rect.centery
-                xcenter = self.rect.centerx
-                self.rect.width = self.image_povoroter1.get_width()
-                self.rect.height = self.image_povoroter1.get_height()
-                self.rect.centerx = xcenter
-                self.rect.centery = ycenter
+                self.rect.size = self.image_povoroter1.get_size()
+        self.rect.centerx = xcenter
+        self.rect.centery = ycenter
 
     def paint_debug(self, screen: pygame.Surface):
         pygame.draw.rect(screen, [255, 0, 0], self.rect, 3)
@@ -89,6 +73,7 @@ class Enemyc:
         for o in events:
             if o.type == self.timer_number:
                 self.modelier()
+
             # if o.type == self.timer_number2:
             #     self.povorot(True, False, 45)
 
@@ -105,13 +90,6 @@ class Enemyc:
             self.rect.left = self.move_rect.left
 
     def povorot(self, ygol):
-        ycenter = self.rect.centery
-        xcenter = self.rect.centerx
         self.image_povoroter1 = pygame.transform.rotate(self.image, ygol)
         self.image_povoroter2 = pygame.transform.rotate(self.image2, ygol)
-        self.rect.width = self.image_povoroter1.get_width()
-        self.rect.height = self.image_povoroter1.get_height()
-        self.rect.width = self.image_povoroter2.get_width()
-        self.rect.height = self.image_povoroter2.get_height()
-        self.rect.centerx = xcenter
-        self.rect.centery = ycenter
+        self.rect_remaker()

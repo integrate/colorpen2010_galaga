@@ -12,7 +12,7 @@ def risovanie():
 
     if model.paint == True:
         for o in model.enemies:
-            o.paint(model.viewed, screen)
+            o.paint(screen)
         model.player.paint(screen)
     if model.debug == True:
         for i in model.enemies:

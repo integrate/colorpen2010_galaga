@@ -21,6 +21,6 @@ def control():
             model.paint = not model.paint
         if o.type == pygame.KEYUP and o.key == pygame.K_d:
             model.enemies[0].povorot(45)
-            model.viewed = not model.viewed
+            model.enemies[0].povorot_yes_or_no= not model.enemies[0].povorot_yes_or_no
         if o.type == pygame.KEYUP and o.key == pygame.K_a:
             pass
