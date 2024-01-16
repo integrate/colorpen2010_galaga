@@ -1,6 +1,4 @@
-import pygame
-
-import settings
+import pygame,settings
 
 pygame.init()
 
@@ -22,9 +20,10 @@ class Enemyc:
                                                          self.image.get_height() * settings.dounler])
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
         self.krilia_yes_or_no = True
+        self.povorot_yes_or_no= True
 
-        self.image_2 = self.image
-        self.image2_2 = self.image2
+        self.image_povoroter1 = self.image
+        self.image_povoroter2 = self.image2
 
         self.move_rect = pygame.rect.Rect(xmove_l, y, xmove_r - xmove_l, self.rect.height)
 
@@ -37,26 +36,41 @@ class Enemyc:
                 screen.blit(self.image2, [self.rect.x, self.rect.y])
         if view == True:
             if self.krilia_yes_or_no == True:
-                screen.blit(self.image_2, [self.rect.x, self.rect.y])
+                screen.blit(self.image_povoroter1, [self.rect.x, self.rect.y])
             if self.krilia_yes_or_no == False:
-                screen.blit(self.image2_2, [self.rect.x, self.rect.y])
+                screen.blit(self.image_povoroter2, [self.rect.x, self.rect.y])
 
     def rect_remaker(self):
         if self.krilia_yes_or_no == True:
-            if
-            ycenter = self.rect.centery
-            xcenter = self.rect.centerx
-            self.rect.width = self.image.get_width()
-            self.rect.height = self.image.get_height()
-            self.rect.centerx = xcenter
-            self.rect.centery = ycenter
+            if self.povorot_yes_or_no==True:
+                ycenter = self.rect.centery
+                xcenter = self.rect.centerx
+                self.rect.width = self.image_povoroter1.get_width()
+                self.rect.height = self.image_povoroter1.get_height()
+                self.rect.centerx = xcenter
+                self.rect.centery = ycenter
+            if self.povorot_yes_or_no == False:
+                ycenter = self.rect.centery
+                xcenter = self.rect.centerx
+                self.rect.width = self.image.get_width()
+                self.rect.height = self.image.get_height()
+                self.rect.centerx = xcenter
+                self.rect.centery = ycenter
         if self.krilia_yes_or_no == False:
-            ycenter = self.rect.centery
-            xcenter = self.rect.centerx
-            self.rect.width = self.image2.get_width()
-            self.rect.height = self.image2.get_height()
-            self.rect.centerx = xcenter
-            self.rect.centery = ycenter
+            if self.povorot_yes_or_no == True:
+                ycenter = self.rect.centery
+                xcenter = self.rect.centerx
+                self.rect.width = self.image_povoroter2.get_width()
+                self.rect.height = self.image_povoroter2.get_height()
+                self.rect.centerx = xcenter
+                self.rect.centery = ycenter
+            if self.povorot_yes_or_no == False:
+                ycenter = self.rect.centery
+                xcenter = self.rect.centerx
+                self.rect.width = self.image_povoroter1.get_width()
+                self.rect.height = self.image_povoroter1.get_height()
+                self.rect.centerx = xcenter
+                self.rect.centery = ycenter
 
     def paint_debug(self, screen: pygame.Surface):
         pygame.draw.rect(screen, [255, 0, 0], self.rect, 3)
@@ -65,18 +79,18 @@ class Enemyc:
     def moving(self, number):
         self.animation_krilia()
         self.rect_remaker()
-        # self.rect.x += number
+        self.rect.x += number
 
     def animation_krilia(self):
 
-        self.krilia_yes_or_no =  self.krilia_yes_or_no
+        self.krilia_yes_or_no = not self.krilia_yes_or_no
 
     def toolgun(self, events):
         for o in events:
             if o.type == self.timer_number:
                 self.modelier()
             # if o.type == self.timer_number2:
-                # self.povorot(True, False, 45)
+            #     self.povorot(True, False, 45)
 
     def modelier(self):
         if self.gothere == True:
@@ -93,11 +107,11 @@ class Enemyc:
     def povorot(self, ygol):
         ycenter = self.rect.centery
         xcenter = self.rect.centerx
-        self.image_2 = pygame.transform.rotate(self.image, ygol)
-        self.image2_2 = pygame.transform.rotate(self.image2, ygol)
-        self.rect.width = self.image_2.get_width()
-        self.rect.height = self.image_2.get_height()
-        self.rect.width = self.image2_2.get_width()
-        self.rect.height = self.image2_2.get_height()
+        self.image_povoroter1 = pygame.transform.rotate(self.image, ygol)
+        self.image_povoroter2 = pygame.transform.rotate(self.image2, ygol)
+        self.rect.width = self.image_povoroter1.get_width()
+        self.rect.height = self.image_povoroter1.get_height()
+        self.rect.width = self.image_povoroter2.get_width()
+        self.rect.height = self.image_povoroter2.get_height()
         self.rect.centerx = xcenter
         self.rect.centery = ycenter
