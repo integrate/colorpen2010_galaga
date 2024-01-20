@@ -20,7 +20,7 @@ class Enemyc:
                                                          self.image.get_height() * settings.dounler])
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
         self.krilia_yes_or_no = True
-        self.povorot_yes_or_no= True
+        self.povorot_yes_or_no= False
 
         self.image_povoroter1 = self.image
         self.image_povoroter2 = self.image2
@@ -52,7 +52,7 @@ class Enemyc:
             if self.povorot_yes_or_no == True:
                 self.rect.size = self.image_povoroter2.get_size()
             if self.povorot_yes_or_no == False:
-                self.rect.size = self.image_povoroter1.get_size()
+                self.rect.size = self.image2.get_size()
         self.rect.centerx = xcenter
         self.rect.centery = ycenter
 
@@ -92,4 +92,11 @@ class Enemyc:
     def povorot(self, ygol):
         self.image_povoroter1 = pygame.transform.rotate(self.image, ygol)
         self.image_povoroter2 = pygame.transform.rotate(self.image2, ygol)
+        self.povorot_yes_or_no = True
+
         self.rect_remaker()
+
+    def rovnyi(self):
+        self.povorot_yes_or_no = False
+        self.rect_remaker()
+

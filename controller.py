@@ -1,3 +1,5 @@
+import random
+
 import pygame
 
 import model
@@ -20,7 +22,8 @@ def control():
         if o.type == pygame.KEYUP and o.key == pygame.K_q:
             model.paint = not model.paint
         if o.type == pygame.KEYUP and o.key == pygame.K_d:
-            model.enemies[0].povorot(45)
-            model.enemies[0].povorot_yes_or_no= not model.enemies[0].povorot_yes_or_no
+            model.enemies[0].povorot(random.randint(45,180))
+        if o.type == pygame.KEYUP and o.key == pygame.K_a:
+            model.enemies[0].rovnyi()
         if o.type == pygame.KEYUP and o.key == pygame.K_a:
             pass
