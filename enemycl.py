@@ -21,6 +21,9 @@ class Enemyc:
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
         self.krilia_yes_or_no = True
         self.povorot_yes_or_no= False
+        self.stop_krilia=False #остановка мохания крыльев
+
+        self.povorotik= 0
 
         self.image_povoroter1 = self.image
         self.image_povoroter2 = self.image2
@@ -29,15 +32,15 @@ class Enemyc:
 
     def paint(self, screen: pygame.Surface):
         self.screen = screen
-        if self.povorot_yes_or_no == False:
-            if self.krilia_yes_or_no == True:
+        if self.krilia_yes_or_no == True:
+            if self.povorot_yes_or_no == False:
                 screen.blit(self.image, [self.rect.x, self.rect.y])
-            if self.krilia_yes_or_no == False:
-                screen.blit(self.image2, [self.rect.x, self.rect.y])
-        if self.povorot_yes_or_no == True:
-            if self.krilia_yes_or_no == True:
+            if self.povorot_yes_or_no == True:
                 screen.blit(self.image_povoroter1, [self.rect.x, self.rect.y])
-            if self.krilia_yes_or_no == False:
+        if self.krilia_yes_or_no == False:
+            if self.povorot_yes_or_no == False:
+                screen.blit(self.image2, [self.rect.x, self.rect.y])
+            if self.povorot_yes_or_no == True:
                 screen.blit(self.image_povoroter2, [self.rect.x, self.rect.y])
 
     def rect_remaker(self):
@@ -72,7 +75,8 @@ class Enemyc:
     def toolgun(self, events):
         for o in events:
             if o.type == self.timer_number:
-                self.modelier()
+                if self.stop_krilia == False:
+                        self.modelier()
 
             # if o.type == self.timer_number2:
             #     self.povorot(True, False, 45)
@@ -90,13 +94,19 @@ class Enemyc:
             self.rect.left = self.move_rect.left
 
     def povorot(self, ygol):
-        self.image_povoroter1 = pygame.transform.rotate(self.image, ygol)
-        self.image_povoroter2 = pygame.transform.rotate(self.image2, ygol)
+        if self.povorotik != ygol:
+            self.povorotik+=1
+            self.povorot(ygol)
+        self.image_povoroter1 = pygame.transform.rotate(self.image, self.povorotik)
+        self.image_povoroter2 = pygame.transform.rotate(self.image2, self.povorotik)
         self.povorot_yes_or_no = True
+        self.stop_krilia = True
+        self.povorotik = 0
 
         self.rect_remaker()
 
     def rovnyi(self):
         self.povorot_yes_or_no = False
         self.rect_remaker()
+        self.stop_krilia = False
 
