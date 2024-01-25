@@ -1,5 +1,6 @@
-import pygame,settings
+import time
 
+import pygame,settings
 pygame.init()
 
 
@@ -29,6 +30,7 @@ class Enemyc:
         self.image_povoroter2 = self.image2
 
         self.move_rect = pygame.rect.Rect(xmove_l, y, xmove_r - xmove_l, self.rect.height)
+        self.ygol=0
 
     def paint(self, screen: pygame.Surface):
         self.screen = screen
@@ -42,6 +44,7 @@ class Enemyc:
                 screen.blit(self.image2, [self.rect.x, self.rect.y])
             if self.povorot_yes_or_no == True:
                 screen.blit(self.image_povoroter2, [self.rect.x, self.rect.y])
+
 
     def rect_remaker(self):
         ycenter = self.rect.centery
@@ -96,12 +99,15 @@ class Enemyc:
     def povorot(self, ygol):
         if self.povorotik != ygol:
             self.povorotik+=1
+            self.image_povoroter1 = pygame.transform.rotate(self.image, self.povorotik)
+            self.image_povoroter2 = pygame.transform.rotate(self.image2, self.povorotik)
+            self.paint(self.screen)
+            pygame.display.flip()
+            time.sleep(0.1)
             self.povorot(ygol)
-        self.image_povoroter1 = pygame.transform.rotate(self.image, self.povorotik)
-        self.image_povoroter2 = pygame.transform.rotate(self.image2, self.povorotik)
+
         self.povorot_yes_or_no = True
         self.stop_krilia = True
-        self.povorotik = 0
 
         self.rect_remaker()
 
