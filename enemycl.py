@@ -12,6 +12,7 @@ class Enemyc:
         pygame.time.set_timer(self.timer_number2, timer2)
         self.gothere = True
         self.move_speed = move_speed
+        self.screen = None
 
         self.image2 = pygame.image.load(pyt2)
         self.image = pygame.image.load(pyt)
@@ -76,6 +77,9 @@ class Enemyc:
         self.krilia_yes_or_no = not self.krilia_yes_or_no
 
     def toolgun(self, events):
+        if self.screen != None:
+            pygame.draw.rect(self.screen, [10, 20, 10], [50, 50, 40, 40])
+            print('im working')
         for o in events:
             if o.type == self.timer_number:
                 if self.stop_krilia == False:
@@ -101,9 +105,10 @@ class Enemyc:
             self.povorotik+=1
             self.image_povoroter1 = pygame.transform.rotate(self.image, self.povorotik)
             self.image_povoroter2 = pygame.transform.rotate(self.image2, self.povorotik)
-            self.paint(self.screen)
-            pygame.display.flip()
-            time.sleep(0.1)
+            # self.paint(self.screen)
+            # time.sleep(0.1)
+            # pygame.display.flip()
+
             self.povorot(ygol)
 
         self.povorot_yes_or_no = True
