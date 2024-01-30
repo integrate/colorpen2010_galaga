@@ -31,7 +31,8 @@ class Enemyc:
         self.image_povoroter2 = self.image2
 
         self.move_rect = pygame.rect.Rect(xmove_l, y, xmove_r - xmove_l, self.rect.height)
-        self.ygol=0
+        self.ygol_povorota=0
+
 
     def paint(self, screen: pygame.Surface):
         self.screen = screen
@@ -77,16 +78,15 @@ class Enemyc:
         self.krilia_yes_or_no = not self.krilia_yes_or_no
 
     def toolgun(self, events):
-        if self.screen != None:
-            pygame.draw.rect(self.screen, [10, 20, 10], [50, 50, 40, 40])
-            print('im working')
+
         for o in events:
             if o.type == self.timer_number:
                 if self.stop_krilia == False:
                         self.modelier()
+            if o.type == self.timer_number2:
+                if self.povorot_yes_or_no:
+                    self.plavniy_povorot()
 
-            # if o.type == self.timer_number2:
-            #     self.povorot(True, False, 45)
 
     def modelier(self):
         if self.gothere == True:
@@ -100,21 +100,17 @@ class Enemyc:
             self.gothere = False
             self.rect.left = self.move_rect.left
 
-    def povorot(self, ygol):
-        if self.povorotik != ygol:
+    def plavniy_povorot(self):
+        if self.povorotik != self.ygol_povorota:
             self.povorotik+=1
             self.image_povoroter1 = pygame.transform.rotate(self.image, self.povorotik)
             self.image_povoroter2 = pygame.transform.rotate(self.image2, self.povorotik)
-            # self.paint(self.screen)
-            # time.sleep(0.1)
-            # pygame.display.flip()
+            self.rect_remaker()
 
-            self.povorot(ygol)
-
-        self.povorot_yes_or_no = True
+    def povorot(self,ygol):
+        self.ygol_povorota=ygol
         self.stop_krilia = True
-
-        self.rect_remaker()
+        self.povorot_yes_or_no = True
 
     def rovnyi(self):
         self.povorot_yes_or_no = False
