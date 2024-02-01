@@ -3,7 +3,7 @@ import pygame, enemycl
 
 def level_1_enemie(enemies):
     for i in range(170, 334, 40):
-        enemy = enemycl.Enemyc('original/enemy/big_green1.png', 'original/enemy/big_green2.png', i, 100, 500, 200, i,
+        enemy = enemycl.Enemyc('original/enemy/big_green1.png', 'original/enemy/big_green2.png', i, 100, 500, 25, i,
                                i + 120, 15)
         enemies.append(enemy)
     for i in range(112, 400, 40):

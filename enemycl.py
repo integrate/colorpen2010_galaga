@@ -102,15 +102,26 @@ class Enemyc:
 
     def plavniy_povorot(self):
         if self.povorotik != self.ygol_povorota:
-            self.povorotik+=1
+            if self.povorotik>self.ygol_povorota:
+                self.povorotik-=1
+            else:
+                self.povorotik+=1
+
             self.image_povoroter1 = pygame.transform.rotate(self.image, self.povorotik)
             self.image_povoroter2 = pygame.transform.rotate(self.image2, self.povorotik)
             self.rect_remaker()
 
     def povorot(self,ygol):
-        self.ygol_povorota=ygol
+        self.ygol_povorota=-ygol
         self.stop_krilia = True
         self.povorot_yes_or_no = True
+
+    def fly(self):
+        self.stop_krilia = True
+        self.flying_yes_or_no = True
+
+    def flying(self):
+
 
     def rovnyi(self):
         self.povorot_yes_or_no = False
