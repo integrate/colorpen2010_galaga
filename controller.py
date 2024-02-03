@@ -1,9 +1,6 @@
-import random
-
 import pygame
 
 import model
-import settings
 
 pygame.key.set_repeat(100)
 
@@ -28,4 +25,6 @@ def control():
         if o.type == pygame.KEYUP and o.key == pygame.K_f:
             model.enemies[0].povorot(111)
         if o.type == pygame.KEYUP and o.key == pygame.K_w:
-            model.enemies[0].fly
+            model.enemies[0].fly()
+        if o.type==pygame.MOUSEBUTTONUP:
+

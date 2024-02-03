@@ -8,6 +8,8 @@ class Enemyc:
     def __init__(self, pyt, pyt2, x, y, timer, timer2, xmove_l, xmove_r, move_speed):
         self.timer_number = pygame.event.custom_type()
         self.timer_number2 = pygame.event.custom_type()
+        self.timer_number3 = pygame.event.custom_type()
+        pygame.time.set_timer(self.timer_number3,25)
         pygame.time.set_timer(self.timer_number, timer)
         pygame.time.set_timer(self.timer_number2, timer2)
         self.gothere = True
@@ -23,6 +25,7 @@ class Enemyc:
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
         self.krilia_yes_or_no = True
         self.povorot_yes_or_no= False
+        self.flying_yes_or_no=False
         self.stop_krilia=False #остановка мохания крыльев
 
         self.povorotik= 0
@@ -32,6 +35,9 @@ class Enemyc:
 
         self.move_rect = pygame.rect.Rect(xmove_l, y, xmove_r - xmove_l, self.rect.height)
         self.ygol_povorota=0
+
+        self.dest_point=[x,y]
+        self.going=[x,y]
 
 
     def paint(self, screen: pygame.Surface):
@@ -86,6 +92,9 @@ class Enemyc:
             if o.type == self.timer_number2:
                 if self.povorot_yes_or_no:
                     self.plavniy_povorot()
+            if o.type == self.timer_number3:
+                if self.flying_yes_or_no:
+                    self.flying()
 
 
     def modelier(self):
@@ -121,7 +130,14 @@ class Enemyc:
         self.flying_yes_or_no = True
 
     def flying(self):
-
+        if self.going != self.dest_point:
+            # if self.going[0] <self.dest_point[0]:
+            self.going[0]+=1
+            if self.going[1] <self.dest_point[1]:
+                self.going[1]+=1
+            self.rect_remaker()
+            self.rect.x=self.going[0]
+            self.rect.y=self.going[1]
 
     def rovnyi(self):
         self.povorot_yes_or_no = False
