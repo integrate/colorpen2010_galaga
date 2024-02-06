@@ -27,4 +27,4 @@ def control():
         if o.type == pygame.KEYUP and o.key == pygame.K_w:
             model.enemies[0].fly()
         if o.type==pygame.MOUSEBUTTONUP:
-
+            model.enemies[0].mouse_pointer(o.pos)
