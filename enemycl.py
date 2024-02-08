@@ -123,26 +123,25 @@ class Enemyc:
         self.stop_krilia = True
         self.povorot_yes_or_no = True
 
-    def fly(self):
-        self.stop_krilia = True
-        self.flying_yes_or_no = True
-
     def flying(self):
         if self.going != self.dest_point:
             if self.going[0] < self.dest_point[0]:
                 self.going[0] += 1
-            else:
+            elif self.going[0] > self.dest_point[0]:
                 self.going[0] -= 1
             if self.going[1] < self.dest_point[1]:
                 self.going[1] += 1
-            else:
+            elif self.going[1] > self.dest_point[1]:
                 self.going[1] -= 1
             self.rect_remaker()
-            self.rect.x = self.going[0]
-            self.rect.y = self.going[1]
+            self.rect.centerx = self.going[0]
+            self.rect.centery = self.going[1]
             print(self.rect,self.dest_point,self.going)
 
     def mouse_pointer(self, xy):
+        self.going=[self.rect.centerx ,self.rect.centery]
+        self.stop_krilia = True
+        self.flying_yes_or_no = True
         self.dest_point.clear()
         self.dest_point.append(xy[0])
         self.dest_point.append(xy[1])
