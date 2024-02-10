@@ -24,5 +24,7 @@ def control():
             model.enemies[0].rovnyi()
         if o.type == pygame.KEYUP and o.key == pygame.K_f:
             model.enemies[0].povorot(111)
+        if o.type == pygame.KEYUP and o.key == pygame.K_r:
+            model.enemies[0].plavniy_fly()
         if o.type==pygame.MOUSEBUTTONUP:
             model.enemies[0].mouse_pointer(o.pos)

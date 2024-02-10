@@ -10,9 +10,11 @@ class Enemyc:
         self.timer_number = pygame.event.custom_type()
         self.timer_number2 = pygame.event.custom_type()
         self.timer_number3 = pygame.event.custom_type()
+        self.timer_number4 = pygame.event.custom_type()
         pygame.time.set_timer(self.timer_number3, 25)
         pygame.time.set_timer(self.timer_number, timer)
         pygame.time.set_timer(self.timer_number2, timer2)
+        pygame.time.set_timer(self.timer_number4, 25)
         self.gothere = True
         self.move_speed = move_speed
         self.screen = None
@@ -39,6 +41,12 @@ class Enemyc:
 
         self.dest_point = [x, y]
         self.going = [x, y]
+        self.moving_speed=[1,2]
+
+        self.ygol_povorota=3
+        self.skorost=3
+        self.plavniy_yes_or_no=False
+
 
     def paint(self, screen: pygame.Surface):
         self.screen = screen
@@ -94,6 +102,10 @@ class Enemyc:
             if o.type == self.timer_number3:
                 if self.flying_yes_or_no:
                     self.flying()
+            if o.type == self.timer_number4:
+                if self.plavniy_yes_or_no:
+                    self.plavniy_flying()
+
 
     def modelier(self):
         if self.gothere == True:
@@ -125,18 +137,24 @@ class Enemyc:
 
     def flying(self):
         if self.going != self.dest_point:
-            if self.going[0] < self.dest_point[0]:
-                self.going[0] += 1
-            elif self.going[0] > self.dest_point[0]:
-                self.going[0] -= 1
-            if self.going[1] < self.dest_point[1]:
-                self.going[1] += 1
-            elif self.going[1] > self.dest_point[1]:
-                self.going[1] -= 1
+            self.moving_speed[0]=(self.dest_point[0]-self.going[0])/20
+            self.moving_speed[1]=(self.dest_point[1]-self.going[1])/20
+            if self.going[0] != self.dest_point[0]:
+                self.going[0] += self.moving_speed[0]
+            if self.going[1] != self.dest_point[1]:
+                self.going[1] += self.moving_speed[1]
             self.rect_remaker()
             self.rect.centerx = self.going[0]
             self.rect.centery = self.going[1]
             print(self.rect,self.dest_point,self.going)
+
+    def plavniy_fly(self):
+        self.krilia_yes_or_no=False
+        self.plavniy_yes_or_no=True
+
+
+    def plavniy_flying(self):
+            print('i am working right now')
 
     def mouse_pointer(self, xy):
         self.going=[self.rect.centerx ,self.rect.centery]
