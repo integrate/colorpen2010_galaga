@@ -1,4 +1,4 @@
-import time
+import math_utils
 
 import pygame, settings
 
@@ -154,7 +154,9 @@ class Enemyc:
 
 
     def plavniy_flying(self):
-            print('i am working right now')
+        mather=math_utils.get_point_by_angle([400,450],3,3)
+        self.rect.
+
 
     def mouse_pointer(self, xy):
         self.going=[self.rect.centerx ,self.rect.centery]
