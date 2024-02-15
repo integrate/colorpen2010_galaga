@@ -149,13 +149,20 @@ class Enemyc:
             print(self.rect,self.dest_point,self.going)
 
     def plavniy_fly(self):
-        self.krilia_yes_or_no=False
+        self.stop_krilia=True
+        self.povorot_yes_or_no = True
         self.plavniy_yes_or_no=True
 
 
     def plavniy_flying(self):
-        mather=math_utils.get_point_by_angle([400,450],3,3)
-        self.rect.
+        print(self.povorotik)
+        self.povorotik+=3
+        mather=math_utils.get_point_by_angle([self.rect.centerx,self.rect.centery],self.povorotik,3)
+        self.rect.centerx=mather[0]
+        self.rect.centery=mather[1]
+        self.image_povoroter1 = pygame.transform.rotate(self.image, self.povorotik)
+        self.image_povoroter2 = pygame.transform.rotate(self.image2, self.povorotik)
+        self.rect_remaker()
 
 
     def mouse_pointer(self, xy):
