@@ -62,6 +62,9 @@ class Enemyc:
                 screen.blit(self.image_povoroter2, [self.rect.x, self.rect.y])
 
     def rect_remaker(self):
+        """
+        система хитбоксов
+        """
         ycenter = self.rect.centery
         xcenter = self.rect.centerx
         if self.krilia_yes_or_no == True:
@@ -121,14 +124,13 @@ class Enemyc:
 
     def plavniy_povorot(self):
         if self.povorotik != self.ygol_povorota:
-            if self.povorotik > self.ygol_povorota:
+            if self.povorotik > self.ygol_povorota :
                 self.povorotik -= 1
             else:
                 self.povorotik += 1
 
-            self.image_povoroter1 = pygame.transform.rotate(self.image, self.povorotik)
-            self.image_povoroter2 = pygame.transform.rotate(self.image2, self.povorotik)
-            self.rect_remaker()
+            self.povoroters()
+
 
     def povorot(self, ygol):
         self.ygol_povorota = -ygol
@@ -155,15 +157,19 @@ class Enemyc:
 
 
     def plavniy_flying(self):
-        print(self.povorotik)
-        self.povorotik+=3
-        mather=math_utils.get_point_by_angle([self.rect.centerx,self.rect.centery],self.povorotik,3)
-        self.rect.centerx=mather[0]
-        self.rect.centery=mather[1]
+        if self.povorotik != 90:
+            print(self.povorotik)
+            self.povorotik+=3
+            mather=math_utils.get_point_by_angle([self.rect.centerx,self.rect.centery],self.povorotik,3)
+            self.rect.centerx=mather[0]
+            self.rect.centery=mather[1]
+            self.povoroters()
+
+
+    def povoroters(self):
         self.image_povoroter1 = pygame.transform.rotate(self.image, self.povorotik)
         self.image_povoroter2 = pygame.transform.rotate(self.image2, self.povorotik)
         self.rect_remaker()
-
 
     def mouse_pointer(self, xy):
         self.going=[self.rect.centerx ,self.rect.centery]
