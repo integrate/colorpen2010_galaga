@@ -28,10 +28,14 @@ class Enemyc:
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
         self.krilia_yes_or_no = True
         self.povorot_yes_or_no = False
+        self.image_povorot_yes_or_no= False
         self.flying_yes_or_no = False
         self.stop_krilia = False  # остановка мохания крыльев
 
         self.povorotik = 0
+
+        self.ygol=90
+        self.storona=False
 
         self.image_povoroter1 = self.image
         self.image_povoroter2 = self.image2
@@ -41,24 +45,23 @@ class Enemyc:
 
         self.dest_point = [x, y]
         self.going = [x, y]
-        self.moving_speed=[1,2]
+        self.moving_speed = [1, 2]
 
-        self.ygol_povorota=3
-        self.skorost=3
-        self.plavniy_yes_or_no=False
-
+        self.ygol_povorota = 3
+        self.skorost = 3
+        self.plavniy_yes_or_no = False
 
     def paint(self, screen: pygame.Surface):
         self.screen = screen
         if self.krilia_yes_or_no == True:
-            if self.povorot_yes_or_no == False:
+            if self.image_povorot_yes_or_no == False:
                 screen.blit(self.image, [self.rect.x, self.rect.y])
-            if self.povorot_yes_or_no == True:
+            if self.image_povorot_yes_or_no == True:
                 screen.blit(self.image_povoroter1, [self.rect.x, self.rect.y])
         if self.krilia_yes_or_no == False:
-            if self.povorot_yes_or_no == False:
+            if self.image_povorot_yes_or_no == False:
                 screen.blit(self.image2, [self.rect.x, self.rect.y])
-            if self.povorot_yes_or_no == True:
+            if self.image_povorot_yes_or_no == True:
                 screen.blit(self.image_povoroter2, [self.rect.x, self.rect.y])
 
     def rect_remaker(self):
@@ -68,14 +71,14 @@ class Enemyc:
         ycenter = self.rect.centery
         xcenter = self.rect.centerx
         if self.krilia_yes_or_no == True:
-            if self.povorot_yes_or_no == True:
+            if self.image_povorot_yes_or_no == True:
                 self.rect.size = self.image_povoroter1.get_size()
-            if self.povorot_yes_or_no == False:
+            if self.image_povorot_yes_or_no == False:
                 self.rect.size = self.image.get_size()
         if self.krilia_yes_or_no == False:
-            if self.povorot_yes_or_no == True:
+            if self.image_povorot_yes_or_no == True:
                 self.rect.size = self.image_povoroter2.get_size()
-            if self.povorot_yes_or_no == False:
+            if self.image_povorot_yes_or_no == False:
                 self.rect.size = self.image2.get_size()
         self.rect.centerx = xcenter
         self.rect.centery = ycenter
@@ -109,7 +112,6 @@ class Enemyc:
                 if self.plavniy_yes_or_no:
                     self.plavniy_flying()
 
-
     def modelier(self):
         if self.gothere == True:
             self.moving(-self.move_speed)
@@ -124,23 +126,23 @@ class Enemyc:
 
     def plavniy_povorot(self):
         if self.povorotik != self.ygol_povorota:
-            if self.povorotik > self.ygol_povorota :
+            if self.povorotik > self.ygol_povorota:
                 self.povorotik -= 1
             else:
                 self.povorotik += 1
 
             self.povoroters()
 
-
     def povorot(self, ygol):
         self.ygol_povorota = -ygol
         self.stop_krilia = True
         self.povorot_yes_or_no = True
+        self.image_povorot_yes_or_no = True
 
     def flying(self):
         if self.going != self.dest_point:
-            self.moving_speed[0]=(self.dest_point[0]-self.going[0])/20
-            self.moving_speed[1]=(self.dest_point[1]-self.going[1])/20
+            self.moving_speed[0] = (self.dest_point[0] - self.going[0]) / 20
+            self.moving_speed[1] = (self.dest_point[1] - self.going[1]) / 20
             if self.going[0] != self.dest_point[0]:
                 self.going[0] += self.moving_speed[0]
             if self.going[1] != self.dest_point[1]:
@@ -148,23 +150,30 @@ class Enemyc:
             self.rect_remaker()
             self.rect.centerx = self.going[0]
             self.rect.centery = self.going[1]
-            print(self.rect,self.dest_point,self.going)
+            print(self.rect, self.dest_point, self.going)
 
-    def plavniy_fly(self):
-        self.stop_krilia=True
-        self.povorot_yes_or_no = True
-        self.plavniy_yes_or_no=True
-
+    def plavniy_fly(self,ygol,storona):
+        self.ygol=ygol
+        self.storona=storona
+        self.stop_krilia = True
+        self.image_povorot_yes_or_no = True
+        self.plavniy_yes_or_no = True
 
     def plavniy_flying(self):
-        if self.povorotik != 90:
+        if self.povorotik != self.ygol:
             print(self.povorotik)
-            self.povorotik+=3
-            mather=math_utils.get_point_by_angle([self.rect.centerx,self.rect.centery],self.povorotik,3)
-            self.rect.centerx=mather[0]
-            self.rect.centery=mather[1]
+            if self.storona==False:
+                self.povorotik += 3
+            else:
+                self.povorotik-=3
+            mather = math_utils.get_point_by_angle([self.rect.centerx, self.rect.centery], self.povorotik, 1)
+            self.rect.centerx = mather[0]
+            self.rect.centery = mather[1]
             self.povoroters()
+            self.ygol_reset()
 
+    def ygol_reset(self):
+        self.povorotik = self.povorotik % 360
 
     def povoroters(self):
         self.image_povoroter1 = pygame.transform.rotate(self.image, self.povorotik)
@@ -172,7 +181,7 @@ class Enemyc:
         self.rect_remaker()
 
     def mouse_pointer(self, xy):
-        self.going=[self.rect.centerx ,self.rect.centery]
+        self.going = [self.rect.centerx, self.rect.centery]
         self.stop_krilia = True
         self.flying_yes_or_no = True
         self.dest_point.clear()
@@ -182,5 +191,6 @@ class Enemyc:
 
     def rovnyi(self):
         self.povorot_yes_or_no = False
+        self.image_povorot_yes_or_no = False
         self.rect_remaker()
         self.stop_krilia = False

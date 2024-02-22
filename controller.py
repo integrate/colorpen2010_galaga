@@ -19,12 +19,12 @@ def control():
         if o.type == pygame.KEYUP and o.key == pygame.K_q:
             model.paint = not model.paint
         if o.type == pygame.KEYUP and o.key == pygame.K_d:
-            model.enemies[0].povorot(45)
+            model.enemies[0].plavniy_fly(45,True)
         if o.type == pygame.KEYUP and o.key == pygame.K_a:
             model.enemies[0].rovnyi()
         if o.type == pygame.KEYUP and o.key == pygame.K_f:
-            model.enemies[0].povorot(111)
+            model.enemies[0].plavniy_fly(111,False)
         if o.type == pygame.KEYUP and o.key == pygame.K_r:
-            model.enemies[0].plavniy_fly()
+            model.enemies[0].plavniy_fly(180,True)
         if o.type==pygame.MOUSEBUTTONUP:
             model.enemies[0].mouse_pointer(o.pos)
