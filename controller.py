@@ -4,6 +4,7 @@ import model
 
 pygame.key.set_repeat(100)
 
+all_points=[[100,200],[300,150],[126,421]]
 
 def control():
     events = pygame.event.get()

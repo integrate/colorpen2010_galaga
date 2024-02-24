@@ -37,6 +37,8 @@ class Enemyc:
         self.ygol=90
         self.storona=False
 
+        self.pf_point=0,0
+
         self.image_povoroter1 = self.image
         self.image_povoroter2 = self.image2
 
@@ -166,11 +168,19 @@ class Enemyc:
                 self.povorotik += 3
             else:
                 self.povorotik-=3
-            mather = math_utils.get_point_by_angle([self.rect.centerx, self.rect.centery], self.povorotik, 1)
+            mather = math_utils.get_point_by_angle([self.rect.centerx, self.rect.centery], self.povorotik, 5)
             self.rect.centerx = mather[0]
             self.rect.centery = mather[1]
             self.povoroters()
             self.ygol_reset()
+
+    def plavniy_flying_tohcy(self):
+        if self.rect.center!= self.pf_point:
+            if self.rect.centerx==pf:
+                self.povorotik += 3
+            else:
+                self.povorotik-=3
+
 
     def ygol_reset(self):
         self.povorotik = self.povorotik % 360
