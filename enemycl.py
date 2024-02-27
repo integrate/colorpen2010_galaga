@@ -28,16 +28,16 @@ class Enemyc:
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
         self.krilia_yes_or_no = True
         self.povorot_yes_or_no = False
-        self.image_povorot_yes_or_no= False
+        self.image_povorot_yes_or_no = False
         self.flying_yes_or_no = False
         self.stop_krilia = False  # остановка мохания крыльев
 
         self.povorotik = 0
 
-        self.ygol=90
-        self.storona=False
+        self.ygol = 90
+        self.storona = False
 
-        self.pf_point=0,0
+        self.pf_point = 0, 0
 
         self.image_povoroter1 = self.image
         self.image_povoroter2 = self.image2
@@ -52,6 +52,7 @@ class Enemyc:
         self.ygol_povorota = 3
         self.skorost = 3
         self.plavniy_yes_or_no = False
+        self.plavniy_tourch_yes_or_no = False
 
     def paint(self, screen: pygame.Surface):
         self.screen = screen
@@ -113,6 +114,8 @@ class Enemyc:
             if o.type == self.timer_number4:
                 if self.plavniy_yes_or_no:
                     self.plavniy_flying()
+                if self.plavniy_tourch_yes_or_no == True:
+                    self.plavniy_flying_tohcy()
 
     def modelier(self):
         if self.gothere == True:
@@ -154,9 +157,9 @@ class Enemyc:
             self.rect.centery = self.going[1]
             print(self.rect, self.dest_point, self.going)
 
-    def plavniy_fly(self,ygol,storona):
-        self.ygol=ygol
-        self.storona=storona
+    def plavniy_fly(self, ygol, storona):
+        self.ygol = ygol
+        self.storona = storona
         self.stop_krilia = True
         self.image_povorot_yes_or_no = True
         self.plavniy_yes_or_no = True
@@ -164,23 +167,29 @@ class Enemyc:
     def plavniy_flying(self):
         if self.povorotik != self.ygol:
             print(self.povorotik)
-            if self.storona==False:
+            if self.storona == False:
                 self.povorotik += 3
             else:
-                self.povorotik-=3
+                self.povorotik -= 3
             mather = math_utils.get_point_by_angle([self.rect.centerx, self.rect.centery], self.povorotik, 5)
             self.rect.centerx = mather[0]
             self.rect.centery = mather[1]
             self.povoroters()
             self.ygol_reset()
 
-    def plavniy_flying_tohcy(self):
-        if self.rect.center!= self.pf_point:
-            if self.rect.centerx==pf:
-                self.povorotik += 3
-            else:
-                self.povorotik-=3
+    def plavniy_fly_tohcy(self):
+        self.stop_krilia = True
+        self.image_povorot_yes_or_no = True
+        self.plavniy_tourch_yes_or_no= True
 
+
+
+    def plavniy_flying_tohcy(self):
+        if self.rect.center != self.pf_point:
+            print('sswwerrtrf')
+            mather = math_utils.get_point_by_angle([self.rect.centerx, self.rect.centery], self.povorotik, 5)
+            self.rect.centerx = mather[0]
+            self.rect.centery = mather[1]
 
     def ygol_reset(self):
         self.povorotik = self.povorotik % 360
