@@ -37,7 +37,7 @@ class Enemyc:
         self.ygol = 90
         self.storona = False
 
-        self.pf_point = 300, 300
+        self.pf_point = [[300, 300],[100,400],[500,500]]
 
         self.image_povoroter1 = self.image
         self.image_povoroter2 = self.image2
@@ -89,7 +89,8 @@ class Enemyc:
     def paint_debug(self, screen: pygame.Surface):
         pygame.draw.rect(screen, [255, 0, 0], self.rect, 3)
         pygame.draw.rect(screen, [0, 255, 0], self.move_rect, 3)
-        pygame.draw.circle(screen,[240,23,150],self.pf_point,2)
+        for o in self.pf_point:
+            pygame.draw.circle(screen,[240,23,150],o,4)
 
     def moving(self, number):
         self.animation_krilia()
@@ -156,7 +157,6 @@ class Enemyc:
             self.rect_remaker()
             self.rect.centerx = self.going[0]
             self.rect.centery = self.going[1]
-            print(self.rect, self.dest_point, self.going)
 
     def _idi_vperiod(self):
         mather = math_utils.get_point_by_angle([self.rect.centerx, self.rect.centery], self.povorotik, 5)
@@ -172,7 +172,6 @@ class Enemyc:
 
     def plavniy_flying(self):
         if self.povorotik != self.ygol:
-            print(self.povorotik)
             if self.storona == False:
                 self.povorotik += 3
             else:
@@ -187,22 +186,36 @@ class Enemyc:
         self.plavniy_tourch_yes_or_no= True
 
     def plavniy_flying_tohcy(self):
-        if self.rect.center != self.pf_point:
+
+        if len(self.pf_point) == 0:
+            self.plavniy_tourch_yes_or_no=False
+            return
+        point=self.rect.collidepoint(self.pf_point[0])
+        if point==False:
             self._idi_vperiod()
-            angle_point=math_utils.get_angle_by_point([self.rect.centerx,self.rect.centery],self.pf_point)
-            if angle_point!=None:
-                self.povoroters()
-                if self.povorotik<angle_point:
-                    self.povorotik+=3
-                elif self.povorotik>angle_point:
-                    self.povorotik-=3
-                # self.povorotik = angle_point
-            if self.rect.centery>=610:
-                self.rect.centery=-10
-            if self.rect.centerx>=650:
-                self.rect.centerx=-10
-            if self.rect.centerx <= -50:
-                self.rect.centerx = 610
+            self.povorathivay()
+            self.teleport()
+        else:
+            del self.pf_point[0]
+
+    def teleport(self):
+        if self.rect.centery >= 650:
+            self.rect.centery = -10
+        elif self.rect.centery <= -50:
+            self.rect.centery = 610
+        if self.rect.centerx >= 650:
+            self.rect.centerx = -10
+        elif self.rect.centerx <= -50:
+            self.rect.centerx = 610
+
+    def povorathivay(self):
+        angle_point = math_utils.get_angle_by_point([self.rect.centerx, self.rect.centery], self.pf_point[0])
+        if angle_point != None:
+            self.povoroters()
+            if self.povorotik < angle_point:
+                self.povorotik += 3
+            elif self.povorotik > angle_point:
+                self.povorotik -= 3
 
     def ygol_reset(self):
         self.povorotik = self.povorotik % 360
@@ -219,7 +232,6 @@ class Enemyc:
         self.dest_point.clear()
         self.dest_point.append(xy[0])
         self.dest_point.append(xy[1])
-        print(self.dest_point)
 
     def rovnyi(self):
         self.povorot_yes_or_no = False
