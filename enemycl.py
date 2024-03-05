@@ -30,7 +30,7 @@ class Enemyc:
         self.povorot_yes_or_no = False
         self.image_povorot_yes_or_no = False
         self.flying_yes_or_no = False
-        self.stop_krilia = False  # остановка мохания крыльев
+        self.stop_krilia = True  # остановка мохания крыльев
 
         self.povorotik = 0
 

@@ -1,6 +1,6 @@
 import pygame
 
-import model
+import model,levels
 
 pygame.key.set_repeat(100)
 
@@ -30,7 +30,9 @@ def control():
         if o.type == pygame.KEYUP and o.key == pygame.K_r:
             model.enemies[0].plavniy_fly(180, False)
         if o.type == pygame.KEYUP and o.key == pygame.K_b:
-            model.enemies[0].plavniy_fly_tohcy()
+            for j in levels.group1:
+                j.plavniy_fly_tohcy()
+
 
         if o.type == pygame.MOUSEBUTTONUP:
             model.enemies[0].mouse_pointer(o.pos)
