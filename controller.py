@@ -32,6 +32,9 @@ def control():
         if o.type == pygame.KEYUP and o.key == pygame.K_b:
             for j in levels.group1:
                 j.plavniy_fly_tohcy()
+            for k in levels.group2:
+                k.plavniy_fly_tohcy()
+
 
 
         if o.type == pygame.MOUSEBUTTONUP:
