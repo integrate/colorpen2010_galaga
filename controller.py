@@ -38,4 +38,5 @@ def control():
 
 
         if o.type == pygame.MOUSEBUTTONUP:
-            model.enemies[0].mouse_pointer(o.pos)
+            print(pygame.mouse.get_pos())
+            # model.enemies[0].mouse_pointer(o.pos)

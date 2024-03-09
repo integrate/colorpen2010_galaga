@@ -5,6 +5,18 @@ import pygame, settings
 pygame.init()
 
 
+def vibor_ygol(angle_point, povorotik):
+    angle_pointm1 = angle_point - 360
+    angle_pointp1 = angle_pointm1 + 360
+    s = [abs(angle_pointm1 - povorotik), abs(angle_point - povorotik),
+         abs(angle_pointp1 - povorotik)]
+    s1 = min(s)
+    if s1 == s[0]:
+        angle_point = angle_pointm1
+    elif s1 == s[2]:
+        angle_point = angle_pointp1
+    return angle_point
+
 class Enemyc:
     def __init__(self, pyt, pyt2, x, y, timer, timer2, xmove_l, xmove_r, move_speed):
         self.timer_number = pygame.event.custom_type()
@@ -37,7 +49,9 @@ class Enemyc:
         self.ygol = 90
         self.storona = False
 
-        self.pf_point = [[300, 300],[100,400],[500,500]]
+        self.pf_point = [[371, 30],[524,127],[521,316],[356,232]]
+        self.group1_pf_point = [[371, 30], [524, 127], [491, 316], [386, 242]]
+
 
         self.image_povoroter1 = self.image
         self.image_povoroter2 = self.image2
@@ -208,8 +222,11 @@ class Enemyc:
         elif self.rect.centerx <= -50:
             self.rect.centerx = 610
 
+
+
     def povorathivay(self):
         angle_point = math_utils.get_angle_by_point([self.rect.centerx, self.rect.centery], self.pf_point[0])
+        angle_point=vibor_ygol(angle_point,self.povorotik)
         if angle_point != None:
             self.povoroters()
             if self.povorotik < angle_point:
