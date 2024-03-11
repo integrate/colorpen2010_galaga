@@ -1,6 +1,6 @@
 import math_utils
 
-import pygame, settings
+import pygame, settings,random
 
 pygame.init()
 
@@ -49,7 +49,9 @@ class Enemyc:
         self.ygol = 90
         self.storona = False
 
-        self.pf_point = [[371, 30],[524,127],[521,316],[356,232]]
+
+
+        self.pf_point = [[370, 29],[524,125],[490,394],[346,265]]
         self.group1_pf_point = [[371, 30], [524, 127], [491, 316], [386, 242]]
 
 
@@ -195,6 +197,8 @@ class Enemyc:
             self.ygol_reset()
 
     def plavniy_fly_tohcy(self):
+        # self.rect.centery=random.randint(610,650)
+        self.povorotik=180
         self.stop_krilia = True
         self.image_povorot_yes_or_no = True
         self.plavniy_tourch_yes_or_no= True
