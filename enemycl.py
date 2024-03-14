@@ -1,6 +1,6 @@
 import math_utils
 
-import pygame, settings,random
+import pygame, settings
 
 pygame.init()
 
@@ -38,6 +38,7 @@ class Enemyc:
         self.image = pygame.transform.scale(self.image, [self.image.get_width() * settings.dounler,
                                                          self.image.get_height() * settings.dounler])
         self.rect = pygame.rect.Rect(x, y, self.image.get_width(), self.image.get_height())
+        self.rect_start=self.rect.center
         self.krilia_yes_or_no = True
         self.povorot_yes_or_no = False
         self.image_povorot_yes_or_no = False
@@ -51,9 +52,7 @@ class Enemyc:
 
 
 
-        self.pf_point = [[370, 29],[524,125],[490,394],[346,265]]
-        self.group1_pf_point = [[371, 30], [524, 127], [491, 316], [386, 242]]
-
+        self.pf_point = []
 
         self.image_povoroter1 = self.image
         self.image_povoroter2 = self.image2
@@ -196,10 +195,13 @@ class Enemyc:
             self.povoroters()
             self.ygol_reset()
 
-    def plavniy_fly_tohcy(self):
+    def plavniy_fly_tohcy(self,teleport_point,pyt_tochek):
         # self.rect.centery=random.randint(610,650)
         self.povorotik=180
+        self.pf_point=pyt_tochek
+        self.pf_point.append(self.rect_start)
         self.stop_krilia = True
+        self.rect.center=teleport_point
         self.image_povorot_yes_or_no = True
         self.plavniy_tourch_yes_or_no= True
 
@@ -207,6 +209,9 @@ class Enemyc:
 
         if len(self.pf_point) == 0:
             self.plavniy_tourch_yes_or_no=False
+            self.rect.center=self.rect_start
+            self.povorotik=0
+            self.povoroters()
             return
         point=self.rect.collidepoint(self.pf_point[0])
         if point==False:
