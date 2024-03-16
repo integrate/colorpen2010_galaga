@@ -29,6 +29,7 @@ def level_1_enemie(enemies):
                                 200, i, i + 100, 15)
         enemies.append(enemy4)
 
+        # if i==230 or i==270 :
         if i==230 or i==270 :
             group2.append(enemy3)
             group2.append(enemy4)

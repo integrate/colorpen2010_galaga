@@ -6,6 +6,8 @@ pygame.init()
 
 
 def vibor_ygol(angle_point, povorotik):
+    povorotik=-povorotik
+    angle_point=-angle_point
     angle_pointm1 = angle_point - 360
     angle_pointp1 = angle_pointm1 + 360
     s = [abs(angle_pointm1 - povorotik), abs(angle_point - povorotik),
@@ -15,7 +17,8 @@ def vibor_ygol(angle_point, povorotik):
         angle_point = angle_pointm1
     elif s1 == s[2]:
         angle_point = angle_pointp1
-    return angle_point
+    print(s,s1,angle_point,povorotik)
+    return -angle_point
 
 class Enemyc:
     def __init__(self, pyt, pyt2, x, y, timer, timer2, xmove_l, xmove_r, move_speed):
