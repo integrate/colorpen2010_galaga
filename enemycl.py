@@ -1,6 +1,4 @@
-import math_utils
-
-import pygame, settings
+import pygame, settings,launcher,math_utils
 
 pygame.init()
 
@@ -33,6 +31,8 @@ class Enemyc:
         self.gothere = True
         self.move_speed = move_speed
         self.screen = None
+
+        self.group=None
 
         self.image2 = pygame.image.load(pyt2)
         self.image = pygame.image.load(pyt)
@@ -209,7 +209,6 @@ class Enemyc:
         self.plavniy_tourch_yes_or_no= True
 
     def plavniy_flying_tohcy(self):
-
         if len(self.pf_point) == 0:
             self.plavniy_tourch_yes_or_no=False
             self.rect.center=self.rect_start
