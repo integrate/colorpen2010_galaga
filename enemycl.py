@@ -201,7 +201,7 @@ class Enemyc:
     def plavniy_fly_tohcy(self,teleport_point,pyt_tochek):
         # self.rect.centery=random.randint(610,650)
         self.povorotik=180
-        self.pf_point=pyt_tochek
+        self.pf_point=pyt_tochek.copy()
         self.pf_point.append(self.rect_start)
         self.stop_krilia = True
         self.rect.center=teleport_point
