@@ -24,10 +24,12 @@ class Enemyc:
         self.timer_number2 = pygame.event.custom_type()
         self.timer_number3 = pygame.event.custom_type()
         self.timer_number4 = pygame.event.custom_type()
+
         pygame.time.set_timer(self.timer_number3, 25)
         pygame.time.set_timer(self.timer_number, timer)
         pygame.time.set_timer(self.timer_number2, timer2)
         pygame.time.set_timer(self.timer_number4, 25)
+
         self.gothere = True
         self.move_speed = move_speed
         self.screen = None

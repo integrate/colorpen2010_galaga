@@ -18,3 +18,4 @@ class Launcher:
         if len(self.fly)!=0:
             for o in self.fly:
                 o.plavniy_fly_tohcy(self.start, self.pyt)
+                del self.fly[0]
