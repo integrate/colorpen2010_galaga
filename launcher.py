@@ -7,8 +7,17 @@ class Launcher:
         self.start=start
         self.pyt=pyt
         self.launh=False
+
+        self.timer_number = pygame.event.custom_type()
+        pygame.time.set_timer(self.timer_number, 120)
     def flying_launh(self):
         self.launh=True
+    def physical_gun(self,events):
+        for o in events:
+            if o.type == self.timer_number:
+
+                self.timer()
+
 
     def timer(self):
         if self.launh==True:
