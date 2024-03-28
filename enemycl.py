@@ -15,7 +15,7 @@ def vibor_ygol(angle_point, povorotik):
         angle_point = angle_pointm1
     elif s1 == s[2]:
         angle_point = angle_pointp1
-    print(s,s1,angle_point,povorotik)
+    # print(s,s1,angle_point,povorotik)
     return -angle_point
 
 class Enemyc:
