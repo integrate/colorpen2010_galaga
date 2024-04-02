@@ -14,6 +14,7 @@ def control():
     model.lau1.physical_gun(events)
     model.lau2.physical_gun(events)
     model.lau3.physical_gun(events)
+    model.lau4.physical_gun(events)
     for o in model.enemies:
         o.toolgun(events)
 
@@ -37,6 +38,7 @@ def control():
             model.lau1.flying_launh()
             model.lau2.flying_launh()
             model.lau3.flying_launh()
+            model.lau4.flying_launh()
 
 
 

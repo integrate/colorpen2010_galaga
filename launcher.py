@@ -9,6 +9,10 @@ class Launcher:
         self.launh=False
         self.pogranichnik=False
 
+        for i in group:
+            i.rect.x=-30
+            i.rect.y=-30
+
         self.timer2=pygame.event.custom_type()
         self.timer_number = pygame.event.custom_type()
 

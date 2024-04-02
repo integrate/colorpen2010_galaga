@@ -32,6 +32,10 @@ def level_1_enemie(enemies):
         groups([192,312],group3,enemy1)
         groups([192,312],group3,enemy2)
 
+        groups([112,152,352,392],group4,enemy1)
+        groups([112,152,352,392],group4,enemy2)
+
+
 
     for i in range(70, 440, 40):
         enemy3 = enemycl.Enemyc('original/enemy/fly_super_blue1.png', 'original/enemy/fly_super_blue2.png', i, 210, 500,
