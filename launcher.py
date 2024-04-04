@@ -1,8 +1,9 @@
 import pygame,enemycl
 
 class Launcher:
-    def __init__(self,group:list,start,pyt,wait=1):
+    def __init__(self,group:list,start,pyt,wait=1,ygol=180):
         self.waiting=group
+        self.ygol=ygol
         self.fly=[]
         self.start=start
         self.pyt=pyt
@@ -34,5 +35,5 @@ class Launcher:
                 del self.waiting[0]
         if len(self.fly)!=0:
             for o in self.fly:
-                o.plavniy_fly_tohcy(self.start, self.pyt)
+                o.plavniy_fly_tohcy(self.start, self.pyt,self.ygol)
                 del self.fly[0]

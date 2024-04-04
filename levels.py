@@ -11,6 +11,12 @@ def groups(poses,group,enemy:enemycl.Enemyc):
     if enemy.rect.x in poses:
         group.append(enemy)
 
+def zercalo(points,cord):
+    spisok=[]
+    for u in points:
+        spisok.append([cord - u[0],u[1]])
+    return spisok
+
 def level_1_enemie(enemies):
     for i in range(170, 334, 40):
         enemy = enemycl.Enemyc('original/enemy/big_green1.png', 'original/enemy/big_green2.png', i, 100, 500, 25, i,
@@ -18,6 +24,7 @@ def level_1_enemie(enemies):
         enemies.append(enemy)
 
         groups([170,210,250,290,330],group3,enemy)
+
     for i in range(112, 400, 40):
         enemy1 = enemycl.Enemyc('original/enemy/butterfly_red1.png', 'original/enemy/butterfly_red2.png', i, 150, 500,
                                 200, i, i + 100, 15)
