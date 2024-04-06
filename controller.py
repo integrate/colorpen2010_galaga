@@ -1,6 +1,4 @@
-import pygame
-
-import model, levels
+import model, levels,pygame,marshrutizator
 
 pygame.key.set_repeat(100)
 
@@ -40,7 +38,8 @@ def control():
             model.lau3.flying_launh()
             model.lau4.flying_launh()
 
-
+        if o.type==pygame.KEYUP and o.key == pygame.K_m:
+            model.build_true_or_false= not model.build_true_or_false
 
 
         # group1 [10, -10], [[371, 30], [518, 81], [558, 248], [393, 424]]

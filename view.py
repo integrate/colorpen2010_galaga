@@ -13,6 +13,8 @@ def risovanie():
     if model.paint == True:
         for o in model.enemies:
             o.paint(screen)
+        if model.build_true_or_false==True:
+            model.korobka.draw(screen)
         model.player.paint(screen)
     if model.debug == True:
         for i in model.enemies:
