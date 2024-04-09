@@ -40,6 +40,8 @@ def control():
 
         if o.type==pygame.KEYUP and o.key == pygame.K_m:
             model.build_true_or_false= not model.build_true_or_false
+        if o.type==pygame.KEYDOWN and o.key == pygame.K_KP_PLUS:
+            model.korobka.ryletka()
 
 
         # group1 [10, -10], [[371, 30], [518, 81], [558, 248], [393, 424]]
@@ -48,3 +50,4 @@ def control():
         if o.type == pygame.MOUSEBUTTONUP:
             print(pygame.mouse.get_pos())
             # model.enemies[0].mouse_pointer(o.pos)
+    model.korobka.control_center(events)
