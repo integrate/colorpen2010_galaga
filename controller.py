@@ -47,7 +47,8 @@ def control():
         # group1 [10, -10], [[371, 30], [518, 81], [558, 248], [393, 424]]
         # group2 [610, 610], [[221, 30], [22, 127], [77, 408], [262, 364]]
 
-        if o.type == pygame.MOUSEBUTTONUP:
-            print(pygame.mouse.get_pos())
-            # model.enemies[0].mouse_pointer(o.pos)
+        # for j in model.korobka.rector:
+        #     if o.type == pygame.MOUSEBUTTONUP and :j.colidepoint()
+
+
     model.korobka.control_center(events)
