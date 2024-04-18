@@ -13,7 +13,6 @@ class Nadpis():
         self.background = background
         self.h = pygame.font.SysFont('arial', size, True, True)
         self.d = self.h.render(' ' + self.text, True, self.color, self.background)
-        return self
     def nadpisi(self, coins):
         self.d = self.h.render(str(int(coins)) + ' ' + str(self.text), True, self.color, self.background)
 

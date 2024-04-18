@@ -1,15 +1,19 @@
 import pygame,nadpis,random,knopka
 
 class Marshutizator():
-    def __init__(self):
+    def __init__(self,color= [255,254,7]):
+        self.color=color
         self.n1=nadpis.Nadpis(0,0,'build a way mode: ON',15,[255,254,7])
         self.rector=[]
         self.numb=[]
         self.button=knopka.Knopka(10,20,'custom/Entity/кнопка.png',self.ryletka)
         self.ryletka()
+        self.ryletka()
+        self.ryletka()
+        self.vidilenie=self.rector[1]
     def draw(self,screen):
         for o in self.rector:
-            pygame.draw.rect(screen,[255,254,7],o)
+            pygame.draw.rect(screen,self.color,o)
         for i in self.numb:
             i.risyi(screen)
 
