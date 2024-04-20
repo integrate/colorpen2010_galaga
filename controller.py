@@ -47,9 +47,5 @@ def control():
         # group1 [10, -10], [[371, 30], [518, 81], [558, 248], [393, 424]]
         # group2 [610, 610], [[221, 30], [22, 127], [77, 408], [262, 364]]
 
-        for j in model.korobka.rector:
-            if o.type == pygame.MOUSEBUTTONUP and j.collidepoint(o.pos):
-                if model.build_true_or_false == True:
-                    model.korobka.color=[0,255,0]
-
-    model.korobka.control_center(events)
+    if model.build_true_or_false == True:
+        model.korobka.control_center(events)
