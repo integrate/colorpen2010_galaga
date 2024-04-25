@@ -43,4 +43,21 @@ class Marshutizator():
 
                 if o.type == pygame.MOUSEBUTTONUP and j.collidepoint(o.pos):
                     self.vidilenie=j
+                    self.vidilenie_numbera=self.numb[self.rector.index(j)]
+            if self.vidilenie is not None:
+                if o.type == pygame.KEYDOWN and o.key== pygame.K_KP8:
+                    self.vidilenie.y-=5
+                    self.vidilenie_numbera.y-=5
+                if o.type == pygame.KEYDOWN and o.key== pygame.K_KP2:
+                    self.vidilenie.y+=5
+                    self.vidilenie_numbera.y+=5
+                if o.type == pygame.KEYDOWN and o.key== pygame.K_KP4:
+                    self.vidilenie.x-=5
+                    self.vidilenie_numbera.x-=5
+                if o.type == pygame.KEYDOWN and o.key== pygame.K_KP6:
+                    self.vidilenie.x+=5
+                    self.vidilenie_numbera.x+=5
+                    self.points.append(self.vidilenie.center)
+
+
 
