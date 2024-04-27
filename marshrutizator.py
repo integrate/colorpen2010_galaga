@@ -31,7 +31,7 @@ class Marshutizator():
     def ryletka(self):
         self.rectik=pygame.rect.Rect(random.randint(10,580),random.randint(10,580),10,10)
         self.rector.append(self.rectik)
-        self.points.append(self.rectik.center)
+        self.points.append([self.rectik.centerx,self.rectik.centery])
         self.numb.append(nadpis.Nadpis(self.rectik.x + 4, self.rectik.y + 4, str(self.rector.index(self.rectik)), 20, [255, 0, 0]))
     def control_center(self,events):
         self.button.event(events)
@@ -44,20 +44,25 @@ class Marshutizator():
                 if o.type == pygame.MOUSEBUTTONUP and j.collidepoint(o.pos):
                     self.vidilenie=j
                     self.vidilenie_numbera=self.numb[self.rector.index(j)]
+                    self.vidilenie_point=self.points[self.rector.index(j)]
             if self.vidilenie is not None:
                 if o.type == pygame.KEYDOWN and o.key== pygame.K_KP8:
                     self.vidilenie.y-=5
                     self.vidilenie_numbera.y-=5
+                    self.vidilenie_point[1]-=5
+                    print(self.rector)
                 if o.type == pygame.KEYDOWN and o.key== pygame.K_KP2:
                     self.vidilenie.y+=5
                     self.vidilenie_numbera.y+=5
+                    self.vidilenie_point[1] += 5
                 if o.type == pygame.KEYDOWN and o.key== pygame.K_KP4:
                     self.vidilenie.x-=5
                     self.vidilenie_numbera.x-=5
+                    self.vidilenie_point[0] -= 5
                 if o.type == pygame.KEYDOWN and o.key== pygame.K_KP6:
                     self.vidilenie.x+=5
                     self.vidilenie_numbera.x+=5
-                    self.points.append(self.vidilenie.center)
+                    self.vidilenie_point[0] += 5
 
 
 
