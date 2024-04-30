@@ -3,9 +3,12 @@ import pygame,nadpis,random,knopka,enemycl
 
 class Marshutizator():
     def __init__(self,color= [2,2,2]):
+        self.timer_number = pygame.event.custom_type()
+        pygame.time.set_timer(self.timer_number, 100)
         self.color=color
         self.n1=nadpis.Nadpis(0,0,'build a way mode: ON',15,[255,254,7])
         self.rector=[]
+        self.crygi=[]
         self.points=[]
         self.numb=[]
         self.button=knopka.Knopka(10,20,'custom/Entity/кнопка.png',self.ryletka)
@@ -16,6 +19,8 @@ class Marshutizator():
         self.test=enemycl.Enemyc('original/enemy/butterfly_red1.png', 'original/enemy/butterfly_red2.png', 200, 10, 500,
                                 200, 200,10, 15)
     def draw(self,screen):
+        for j in self.crygi:
+            pygame.draw.circle(screen,[255,255,255],j,3)
         for o in self.rector:
             if self.vidilenie is o:
                 pygame.draw.rect(screen,[0,255,0],o)
@@ -39,18 +44,22 @@ class Marshutizator():
         for o in events:
             if o.type == pygame.KEYUP and o.key == pygame.K_s:
                 self.test.plavniy_fly_tohcy(self.rector[0].topleft, self.points)
+
+            if self.test.plavniy_tourch_yes_or_no==True and o.type==self.timer_number:
+                self.crygi.append([self.test.rect.x,self.test.rect.y])
+
             for j in self.rector:
 
                 if o.type == pygame.MOUSEBUTTONUP and j.collidepoint(o.pos):
                     self.vidilenie=j
                     self.vidilenie_numbera=self.numb[self.rector.index(j)]
                     self.vidilenie_point=self.points[self.rector.index(j)]
+
             if self.vidilenie is not None:
                 if o.type == pygame.KEYDOWN and o.key== pygame.K_KP8:
                     self.vidilenie.y-=5
                     self.vidilenie_numbera.y-=5
                     self.vidilenie_point[1]-=5
-                    print(self.rector)
                 if o.type == pygame.KEYDOWN and o.key== pygame.K_KP2:
                     self.vidilenie.y+=5
                     self.vidilenie_numbera.y+=5
