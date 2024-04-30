@@ -46,7 +46,7 @@ class Marshutizator():
                 self.test.plavniy_fly_tohcy(self.rector[0].topleft, self.points)
 
             if self.test.plavniy_tourch_yes_or_no==True and o.type==self.timer_number:
-                self.crygi.append([self.test.rect.x,self.test.rect.y])
+                self.crygi.append([self.test.rect.centerx,self.test.rect.centery])
 
             for j in self.rector:
 
