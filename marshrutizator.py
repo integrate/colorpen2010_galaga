@@ -4,7 +4,7 @@ import pygame,nadpis,random,knopka,enemycl
 class Marshutizator():
     def __init__(self,color= [2,2,2]):
         self.timer_number = pygame.event.custom_type()
-        pygame.time.set_timer(self.timer_number, 100)
+        pygame.time.set_timer(self.timer_number, 2)
         self.color=color
         self.n1=nadpis.Nadpis(0,0,'build a way mode: ON',15,[255,254,7])
         self.rector=[]
@@ -42,6 +42,14 @@ class Marshutizator():
         self.button.event(events)
         self.test.toolgun(events)
         for o in events:
+
+            if o.type==pygame.KEYUP and o.key == pygame.K_KP_ENTER:
+                self.test.plavniy_fly_tohcy(self.rector[0].topleft, self.points)
+                while self.test.plavniy_tourch_yes_or_no==True:
+                    self.test.plavniy_flying_tohcy()
+                    self.crygi.append([self.test.rect.centerx, self.test.rect.centery])
+                    print(self.test.rect.center)
+
             if o.type == pygame.KEYUP and o.key == pygame.K_s:
                 self.test.plavniy_fly_tohcy(self.rector[0].topleft, self.points)
 
@@ -54,6 +62,8 @@ class Marshutizator():
                     self.vidilenie=j
                     self.vidilenie_numbera=self.numb[self.rector.index(j)]
                     self.vidilenie_point=self.points[self.rector.index(j)]
+
+
 
             if self.vidilenie is not None:
                 if o.type == pygame.KEYDOWN and o.key== pygame.K_KP8:
