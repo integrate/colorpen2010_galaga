@@ -12,12 +12,16 @@ class Marshutizator():
         self.points=[]
         self.numb=[]
         self.button=knopka.Knopka(10,20,'custom/Entity/кнопка.png',self.ryletka)
+        self.test = enemycl.Enemyc('original/enemy/butterfly_red1.png', 'original/enemy/butterfly_red2.png', 200, 10,
+                                   500,
+                                   200, 200, 10, 15)
+
         self.ryletka()
         self.ryletka()
         self.ryletka()
         self.vidilenie=None
-        self.test=enemycl.Enemyc('original/enemy/butterfly_red1.png', 'original/enemy/butterfly_red2.png', 200, 10, 500,
-                                200, 200,10, 15)
+        self.test_flying()
+
     def draw(self,screen):
         for j in self.crygi:
             pygame.draw.circle(screen,[255,255,255],j,3)
@@ -38,19 +42,28 @@ class Marshutizator():
         self.rector.append(self.rectik)
         self.points.append([self.rectik.centerx,self.rectik.centery])
         self.numb.append(nadpis.Nadpis(self.rectik.x + 4, self.rectik.y + 4, str(self.rector.index(self.rectik)), 20, [255, 0, 0]))
+        self.test_flying()
+
+    def clear_spisok(self):
+        if len(self.crygi) != 0:
+            self.crygi.clear()
+
+    def test_flying(self):
+        self.clear_spisok()
+        self.test.plavniy_fly_tohcy(self.rector[0].topleft, self.points)
+        while self.test.plavniy_tourch_yes_or_no == True:
+            self.test.plavniy_flying_tohcy()
+            self.crygi.append([self.test.rect.centerx, self.test.rect.centery])
     def control_center(self,events):
         self.button.event(events)
         self.test.toolgun(events)
         for o in events:
 
-            if o.type==pygame.KEYUP and o.key == pygame.K_KP_ENTER:
-                self.test.plavniy_fly_tohcy(self.rector[0].topleft, self.points)
-                while self.test.plavniy_tourch_yes_or_no==True:
-                    self.test.plavniy_flying_tohcy()
-                    self.crygi.append([self.test.rect.centerx, self.test.rect.centery])
-                    print(self.test.rect.center)
 
+            if o.type==pygame.KEYUP and o.key == pygame.K_KP_ENTER:
+                self.test_flying()
             if o.type == pygame.KEYUP and o.key == pygame.K_s:
+                self.clear_spisok()
                 self.test.plavniy_fly_tohcy(self.rector[0].topleft, self.points)
 
             if self.test.plavniy_tourch_yes_or_no==True and o.type==self.timer_number:
@@ -62,6 +75,18 @@ class Marshutizator():
                     self.vidilenie=j
                     self.vidilenie_numbera=self.numb[self.rector.index(j)]
                     self.vidilenie_point=self.points[self.rector.index(j)]
+            if o.type==pygame.KEYUP and o.key == pygame.K_KP_PERIOD:
+                self.vidilenie=None
+                self.vidilenie_numbera = None
+                self.vidilenie_point = None
+            if o.type==pygame.KEYUP and o.key == pygame.K_KP_0:
+                self.rector.clear()
+                self.numb.clear()
+                self.points.clear()
+                self.vidilenie=None
+                self.vidilenie_numbera = None
+                self.vidilenie_point = None
+                self.clear_spisok()
 
 
 
@@ -70,18 +95,22 @@ class Marshutizator():
                     self.vidilenie.y-=5
                     self.vidilenie_numbera.y-=5
                     self.vidilenie_point[1]-=5
+                    self.test_flying()
                 if o.type == pygame.KEYDOWN and o.key== pygame.K_KP2:
                     self.vidilenie.y+=5
                     self.vidilenie_numbera.y+=5
                     self.vidilenie_point[1] += 5
+                    self.test_flying()
                 if o.type == pygame.KEYDOWN and o.key== pygame.K_KP4:
                     self.vidilenie.x-=5
                     self.vidilenie_numbera.x-=5
                     self.vidilenie_point[0] -= 5
+                    self.test_flying()
                 if o.type == pygame.KEYDOWN and o.key== pygame.K_KP6:
                     self.vidilenie.x+=5
                     self.vidilenie_numbera.x+=5
                     self.vidilenie_point[0] += 5
+                    self.test_flying()
 
 
 
