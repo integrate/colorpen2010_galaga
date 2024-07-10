@@ -7,15 +7,24 @@ def vibor_ygol(angle_point, povorotik):
     povorotik=-povorotik
     angle_point=-angle_point
     angle_pointm1 = angle_point - 360
-    angle_pointp1 = angle_pointm1 + 360
-    s = [abs(angle_pointm1 - povorotik), abs(angle_point - povorotik),
-         abs(angle_pointp1 - povorotik)]
+    angle_pointm2 = angle_point - 360*2
+    angle_pointp1 = angle_point + 360
+    angle_pointp2 = angle_point + 360*2
+    s = [abs(angle_pointm2 - povorotik), abs(angle_pointm1 - povorotik), abs(angle_point - povorotik),
+         abs(angle_pointp1 - povorotik), abs(angle_pointp2 - povorotik)]
     s1 = min(s)
+
+    # print("куда смотрю:", povorotik, "  куда нужно:", angle_point, "   все варианты:", s, "   выбрал:", s1)
+
     if s1 == s[0]:
+        angle_point = angle_pointm2
+    elif s1==s[1]:
         angle_point = angle_pointm1
-    elif s1 == s[2]:
+    elif s1 == s[3]:
         angle_point = angle_pointp1
-    # print(s,s1,angle_point,povorotik)
+    elif s1 == s[4]:
+        angle_point = angle_pointp2
+
     return -angle_point
 
 class Enemyc:
